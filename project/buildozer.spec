@@ -47,7 +47,7 @@ android.ndk_api = 21
 android.permissions = INTERNET
 
 # ✅ Build for all common Android architectures (universal)
-android.archs = arm64-v8a, armeabi-v7a, x86, x86_64
+android.archs = x86_64
 
 # (bool) Indicate whether the screen should stay on
 android.wakelock = False
