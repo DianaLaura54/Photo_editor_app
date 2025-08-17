@@ -21,13 +21,11 @@ version = 0.1
 # (list) Application requirements
 requirements = python3,kivy,pyjnius>=1.5.0
 
-
 # (list) Supported orientations
 orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
-
 
 #
 # Android specific
@@ -48,8 +46,8 @@ android.ndk_api = 21
 # (list) Permissions
 android.permissions = INTERNET
 
-# (list) The Android archs to build for
-android.archs = arm64-v8a, armeabi-v7a
+# ✅ Build for all common Android architectures (universal)
+android.archs = arm64-v8a, armeabi-v7a, x86, x86_64
 
 # (bool) Indicate whether the screen should stay on
 android.wakelock = False
@@ -63,13 +61,16 @@ android.logcat_filters = *:S python:D
 # (str) The format used to package the app for debug mode (apk or aar).
 android.debug_artifact = apk
 
+# (str) The format to use for release builds (apk or aab). AAB is recommended for Play Store.
+# Uncomment below if releasing to Google Play
+# android.release_artifact = aab
 
 #
 # iOS specific
 #
 
 # (str) Path to a custom kivy-ios folder
-#ios.kivy_ios_dir = ../kivy-ios
+# ios.kivy_ios_dir = ../kivy-ios
 
 # (str) Kivy-ios repo URL and branch
 ios.kivy_ios_url = https://github.com/kivy/kivy-ios
