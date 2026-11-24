@@ -4,4 +4,5 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="uv (Photo_editor_app) (2)" project-jdk-type="Python SDK" />
 </project>

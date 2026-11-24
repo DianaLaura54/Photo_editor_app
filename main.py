@@ -21,10 +21,9 @@ class Thumbnail(ButtonBehavior, Image):
         super().__init__(**kwargs)
         self.image_path = image_path
         self.source = self.image_path
-        self.size_hint = (None, None)
-        self.size = (150, 150)
-        self.allow_stretch = True
-        self.keep_ratio = True
+        # fill its grid cell (no fixed size), keeping the photo's proportions,
+        # so all thumbnails fit in the window at once
+        self.fit_mode = "contain"
 
     def on_press(self):
         self.parent.parent.show_full_image(self.image_path)
@@ -40,8 +39,8 @@ class ImageList(BoxLayout):
         self.green_channel_image_path = None
         self.blue_channel_image_path = None
         self.classifier = CNNClassifier()
-        self.thumbnail_grid = GridLayout(cols=8, spacing=2, size_hint_y=5)
-        self.thumbnail_grid.bind(minimum_height=self.thumbnail_grid.setter('height'))
+        # the grid takes all the space above the camera button and splits it evenly
+        self.thumbnail_grid = GridLayout(cols=8, spacing=2)
         self.load_images()
 
     def load_images(self):
@@ -100,7 +99,10 @@ class ImageList(BoxLayout):
     def show_full_image(self, image_path):
         self.clear_widgets()
         self.current_image_path = image_path
-        self.full_image = Image(source=image_path)
+        # nocache + reload: Kivy caches images by file name, so a new photo saved over
+        # captured_image.png would otherwise still show the previous capture
+        self.full_image = Image(source=image_path, nocache=True)
+        self.full_image.reload()
         self.add_widget(self.full_image)
 
         button_layout = BoxLayout(size_hint=(1, 0.1), orientation='vertical')
